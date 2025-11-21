@@ -5,7 +5,7 @@
              x:Class="ChartGeneratorMAUI.MainPage">
 
     <ScrollView>
-        <charts:BarChart x:Name="chart" HeightRequest="300"/>
+        <charts:LineChart x:Name="chart" HeightRequest="300"/>
     </ScrollView>
 
 </ContentPage>

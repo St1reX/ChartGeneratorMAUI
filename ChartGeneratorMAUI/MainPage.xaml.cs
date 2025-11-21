@@ -10,14 +10,22 @@ namespace ChartGeneratorMAUI
         {
             InitializeComponent();
 
-            chart.Items = new List<BarData>
-            {
-                new BarData {Label = "Psy", Value = 52},
-                new BarData {Label = "Koty", Value = 12},
-                new BarData {Label = "Konie", Value = 12},
-                new BarData {Label = "Rybki", Value = 4}
-            };
-            chart.YAxisLabel = "Zwierzęta na farmie";
+            chart.Items = new List<LineData>
+{
+                new LineData { Label = "Sty", Value = 45 },
+                new LineData { Label = "Lut", Value = 62 },
+                new LineData { Label = "Mar", Value = 38 },
+                new LineData { Label = "Kwi", Value = 71 },
+                new LineData { Label = "Maj", Value = 55 },
+                new LineData { Label = "Cze", Value = 82 },
+                new LineData { Label = "Lip", Value = 647 },
+                new LineData { Label = "Sie", Value = 49 },
+                new LineData { Label = "Wrz", Value = 58 },
+                new LineData { Label = "Paź", Value = 73 },
+                new LineData { Label = "Lis", Value = 41 },
+                new LineData { Label = "Gru", Value = 76 }
+};
+            chart.YAxisLabel = "Sprzedaż (w tys.)";
         }
 
        
