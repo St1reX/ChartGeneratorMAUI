@@ -1,11 +1,59 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:charts="clr-namespace:ChartGeneratorMAUI.Charts"
-             x:Class="ChartGeneratorMAUI.MainPage">
+             x:Class="ChartGeneratorMAUI.MainPage"
+             Title="Generator Wykresów">
 
     <ScrollView>
-        <charts:LineChart x:Name="chart" HeightRequest="300"/>
+        <VerticalStackLayout Spacing="20" Padding="20">
+            
+            <!-- Input Section -->
+            <Frame BackgroundColor="LightGray" Padding="15">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Wprowadź dane" FontSize="18" FontAttributes="Bold"/>
+                    
+                    <!-- Punkt danych 1 -->
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Etykieta 1:"/>
+                        <Entry x:Name="Label1Entry" Placeholder="Wprowadź etykietę" Text="Sty"/>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Wartość 1:"/>
+                        <Entry x:Name="Value1Entry" Keyboard="Numeric" Placeholder="Wprowadź liczbę"/>
+                    </VerticalStackLayout>
+
+                    <!-- Punkt danych 2 -->
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Etykieta 2:"/>
+                        <Entry x:Name="Label2Entry" Placeholder="Wprowadź etykietę" Text="Lut"/>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Wartość 2:"/>
+                        <Entry x:Name="Value2Entry" Keyboard="Numeric" Placeholder="Wprowadź liczbę"/>
+                    </VerticalStackLayout>
+
+                    <!-- Punkt danych 3 -->
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Etykieta 3:"/>
+                        <Entry x:Name="Label3Entry" Placeholder="Wprowadź etykietę" Text="Mar"/>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Wartość 3:"/>
+                        <Entry x:Name="Value3Entry" Keyboard="Numeric" Placeholder="Wprowadź liczbę"/>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Chart Type Buttons -->
+            <VerticalStackLayout Spacing="10">
+                <Button x:Name="LineChartButton" Text="Generuj Wykres Liniowy" 
+                        Clicked="OnLineChartClicked" BackgroundColor="Blue" TextColor="White"/>
+                <Button x:Name="BarChartButton" Text="Generuj Wykres Słupkowy" 
+                        Clicked="OnBarChartClicked" BackgroundColor="Green" TextColor="White"/>
+                <Button x:Name="PieChartButton" Text="Generuj Wykres Kołowy" 
+                        Clicked="OnPieChartClicked" BackgroundColor="Red" TextColor="White"/>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
     </ScrollView>
 
 </ContentPage>
