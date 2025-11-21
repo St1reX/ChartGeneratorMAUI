@@ -38,17 +38,6 @@ namespace ChartGeneratorMAUI.Charts
                 return;
             }
 
-            // Check if sum equals 100
-            double sum = _chart.Items.Sum(x => x.Value);
-            if (Math.Abs(sum - 100) > 0.001)
-            {
-                canvas.FontSize = 16;
-                canvas.FontColor = Application.Current!.RequestedTheme == AppTheme.Dark ? Colors.White : Colors.Black;
-                canvas.DrawString("Błędny zestaw danych - suma musi wynosić 100%",
-                                dirtyRect.Center.X, dirtyRect.Center.Y, HorizontalAlignment.Center);
-                return;
-            }
-
             // Container sizes
             float width = dirtyRect.Width;
             float height = dirtyRect.Height;
@@ -62,16 +51,16 @@ namespace ChartGeneratorMAUI.Charts
             // Predefined colors for pie slices
             Color[] sliceColors = new Color[]
             {
-            Colors.Red,
-            Colors.Blue,
-            Colors.Green,
-            Colors.Orange,
-            Colors.Purple,
-            Colors.Teal,
-            Colors.Magenta,
-            Colors.Brown,
-            Colors.Navy,
-            Colors.Olive
+                Colors.Red,
+                Colors.Blue,
+                Colors.Green,
+                Colors.Orange,
+                Colors.Purple,
+                Colors.Teal,
+                Colors.Magenta,
+                Colors.Brown,
+                Colors.Navy,
+                Colors.Olive
             };
 
             // Draw title above the chart
@@ -81,6 +70,10 @@ namespace ChartGeneratorMAUI.Charts
                 canvas.FontColor = titleColor;
                 canvas.DrawString(_chart.YAxisLabel, width / 2, 20, HorizontalAlignment.Center);
             }
+
+            // Calculate percentages
+            double total = _chart.Items.Sum(x => x.Value);
+            var percentages = _chart.Items.Select(item => (item.Value / total) * 100).ToList();
 
             // Pie chart dimensions
             float chartSize = Math.Min(width - margin * 2, height - margin * 2 - 40);
@@ -94,7 +87,7 @@ namespace ChartGeneratorMAUI.Charts
             for (int i = 0; i < _chart.Items.Count; i++)
             {
                 var item = _chart.Items[i];
-                float sweepAngle = (float)(item.Value * 3.6); // 3.6 = 360/100
+                float sweepAngle = (float)(percentages[i] * 3.6); // 3.6 = 360/100
 
                 // Use predefined colors, cycle if more items than colors
                 Color sliceColor = sliceColors[i % sliceColors.Length];
@@ -133,10 +126,10 @@ namespace ChartGeneratorMAUI.Charts
                 canvas.StrokeSize = 1;
                 canvas.DrawRectangle(legendX, legendY, 20, 15);
 
-                // Draw legend text
+                // Draw legend text with percentage
                 canvas.FontSize = 12;
                 canvas.FontColor = textColor;
-                canvas.DrawString($"{item.Label} ({item.Value:F1}%)", legendX, legendY - 20, HorizontalAlignment.Left);
+                canvas.DrawString($"{item.Label} ({percentages[i]:F1}%)", legendX + 25, legendY, HorizontalAlignment.Left);
 
                 legendY += legendItemHeight;
 
